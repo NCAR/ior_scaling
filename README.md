@@ -23,9 +23,9 @@ For the parameters:
 | M | Number of chunks per process   |
 | T | IOR transfer size (chunk size) |
 
-The total size of the dataset should be **N * M * T**.
+The total size of a _segment_ of the dataset should be **N * M * T**.
 
-The size of the data written by each process should be **M * T**.
+The size of a _segment_ of the data written by each process should be **M * T**.
 
 ## Weak Scaling Parameters
 
@@ -34,7 +34,8 @@ The size of the data written by each process should be **M * T**.
 - **T**: 8M, 16M, 32M, 64M, 128M, 256M, 512M
 
 All together, this is 7<sup>3</sup> = 343 separate IOR runs (for each API), _or 7<sup>2</sup> = 49
-weak scaling studies for each API._  The _per-process data size_ ranges from 8M to 32G.  And therefore
-the _total data size_ ranges from 8M to 2T.
+weak scaling studies for each API._  The _per-process segment size_ ranges from 8M to 32G.  And therefore
+the _total segment size_ ranges from 8M to 2T.  Assuming 120 segments (akin to 10 years of monthly data),
+the _total size_ will actually be 120x larger.
 
 See the parameters notebook for more details.
