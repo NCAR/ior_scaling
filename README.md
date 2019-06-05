@@ -6,14 +6,14 @@ This study uses the [NCAR/ior](https://github.com/NCAR/ior) fork on GitHub.
 
 The study performs IOR runs for 6 APIs, with the following command-line options:
 
-| **API**      | **COMMAND**                                                                                        |
-|--------------|----------------------------------------------------------------------------------------------------|
-| **POSIX:**   | `mpirun -n N ior -a POSIX -b $(( M * T )) -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T`   |
-| **MPIIO:**   | `mpirun -n N ior -a MPIIO -b $(( M * T )) -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T`   |
-| **NetCDF4:** | `mpirun -n N ior -a NC4 -b $(( M * T )) -c -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T`  |
-| **PnetCDF:** | `mpirun -n N ior -a NCMPI -b $(( M * T )) -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T`   |
-| **HDF5:**    | `mpirun -n N ior -a HDF5 -b $(( M * T )) -c -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T` |
-| **Z5:**      | `mpirun -n N ior -a Z5 -b $(( M * T )) -C -d 2 -e -F -g -i 10 -m -o OUTPATH -Q 1 -s 120 -t T`      |
+| **API**      | **COMMAND**                                                                                            |
+|--------------|--------------------------------------------------------------------------------------------------------|
+| **POSIX:**   | `mpirun -n N ior -a POSIX -b $(( M * T ))    -C -d 1 -e -F -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
+| **Z5:**      | `mpirun -n N ior -a Z5    -b $(( M * T ))    -C -d 1 -e -F -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
+| **MPIIO:**   | `mpirun -n N ior -a MPIIO -b $(( M * T )) -c -C -d 1       -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
+| **HDF5:**    | `mpirun -n N ior -a HDF5  -b $(( M * T )) -c -C -d 1       -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
+| **NetCDF4:** | `mpirun -n N ior -a NC4   -b $(( M * T )) -c -C -d 1       -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
+| **PnetCDF:** | `mpirun -n N ior -a NCMPI -b $(( M * T ))    -C -d 1       -g -i 10 -o OUTPATH -r -s 12 -t T -v -w -Z` |
 
 For the parameters:
 
@@ -23,9 +23,13 @@ For the parameters:
 | M | Number of chunks per process   |
 | T | IOR transfer size (chunk size) |
 
+We will _assume 1 MPI process per compute node_.
+
+The size of a _segment_ written by a single process should be **M * T**.
+
 The total size of a _segment_ of the dataset should be **N * M * T**.
 
-The size of a _segment_ of the data written by each process should be **M * T**.
+The total size of the entire dataset should be **N * M * T * 12**, since there are 12 segments.
 
 ## Weak Scaling Parameters
 
@@ -35,7 +39,7 @@ The size of a _segment_ of the data written by each process should be **M * T**.
 
 All together, this is 7<sup>3</sup> = 343 separate IOR runs (for each API), _or 7<sup>2</sup> = 49
 weak scaling studies for each API._  The _per-process segment size_ ranges from 8M to 32G.  And therefore
-the _total segment size_ ranges from 8M to 2T.  Assuming 120 segments (akin to 10 years of monthly data),
-the _total size_ will actually be 120x larger.
+the _total segment size_ ranges from 8M to 2T.  Assuming 12 segments (akin to 1 year of monthly data),
+the _total size_ will actually be 12x larger.
 
 See the parameters notebook for more details.
