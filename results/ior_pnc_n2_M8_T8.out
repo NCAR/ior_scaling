@@ -1,0 +1,68 @@
+IOR-3.2.0: MPI Coordinated Test of Parallel I/O
+Began               : Thu Jun  6 16:03:56 2019
+Command line        : /glade/work/kpaul/software/ncar-ior/bin/ior -a NCMPI -w -r -C -i10 -g -t 8m -b 64m
+Machine             : Linux r11i3n24
+TestID              : 0
+StartTime           : Thu Jun  6 16:03:56 2019
+Path                : /gpfs/fs1/scratch/kpaul/ior_scaling
+FS                  : 15000.0 TiB   Used FS: 59.5%   Inodes: 2355.6 Mi   Used Inodes: 62.6%
+
+Options: 
+api                 : NCMPI
+apiVersion          : 1.11.0 of 19 Dec 2018
+test filename       : testFile
+access              : single-shared-file
+type                : independent
+segments            : 1
+ordering in a file  : sequential
+ordering inter file : constant task offset
+task offset         : 1
+tasks               : 2
+clients per node    : 1
+repetitions         : 10
+xfersize            : 8 MiB
+blocksize           : 64 MiB
+aggregate filesize  : 128 MiB
+
+Results: 
+
+access    bw(MiB/s)  block(KiB) xfer(KiB)  open(s)    wr/rd(s)   close(s)   total(s)   iter
+------    ---------  ---------- ---------  --------   --------   --------   --------   ----
+write     1183.14    65536      8192       0.007830   0.073375   0.026971   0.108187   0   
+read      6327       65536      8192       0.000816   0.018603   0.000804   0.020231   0   
+remove    -          -          -          -          -          -          0.001722   0   
+write     783.39     65536      8192       0.004117   0.134161   0.025105   0.163392   1   
+read      3494.63    65536      8192       0.003781   0.015394   0.017447   0.036628   1   
+remove    -          -          -          -          -          -          0.002039   1   
+write     961.17     65536      8192       0.003351   0.099558   0.030252   0.133171   2   
+read      2290.64    65536      8192       0.003889   0.017127   0.034858   0.055880   2   
+remove    -          -          -          -          -          -          0.002080   2   
+write     1675.65    65536      8192       0.003901   0.069644   0.002834   0.076388   3   
+read      6814       65536      8192       0.000578   0.017612   0.000587   0.018784   3   
+remove    -          -          -          -          -          -          0.001455   3   
+write     958.38     65536      8192       0.003901   0.124499   0.005151   0.133559   4   
+read      4639       65536      8192       0.004006   0.020297   0.003282   0.027592   4   
+remove    -          -          -          -          -          -          0.002212   4   
+write     1584.72    65536      8192       0.003806   0.070196   0.006759   0.080771   5   
+read      6429       65536      8192       0.000611   0.018550   0.000744   0.019911   5   
+remove    -          -          -          -          -          -          0.001665   5   
+write     1381.53    65536      8192       0.005001   0.060605   0.027034   0.092651   6   
+read      5415       65536      8192       0.003830   0.016209   0.003593   0.023638   6   
+remove    -          -          -          -          -          -          0.002187   6   
+write     1574.24    65536      8192       0.003277   0.073451   0.004571   0.081309   7   
+read      1732.20    65536      8192       0.000570   0.072684   0.000634   0.073895   7   
+remove    -          -          -          -          -          -          0.001647   7   
+write     1375.60    65536      8192       0.005185   0.073450   0.014405   0.093051   8   
+read      6929       65536      8192       0.000488   0.017184   0.000794   0.018473   8   
+remove    -          -          -          -          -          -          0.001232   8   
+write     2600.91    65536      8192       0.005042   0.043482   0.000679   0.049214   9   
+read      2635.29    65536      8192       0.000570   0.047395   0.000598   0.048572   9   
+remove    -          -          -          -          -          -          0.002517   9   
+Max Write: 2600.91 MiB/sec (2727.25 MB/sec)
+Max Read:  6929.12 MiB/sec (7265.71 MB/sec)
+
+Summary of all tests:
+Operation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev   Max(OPs)   Min(OPs)  Mean(OPs)     StdDev    Mean(s) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt   blksiz    xsize aggs(MiB)   API RefNum
+write        2600.91     783.39    1407.87     489.67     325.11      97.92     175.98      61.21    0.10117     0      2   1   10   0     1        1         0    0      1 67108864  8388608     128.0 NCMPI      0
+read         6929.12    1732.20    4670.58    1894.99     866.14     216.52     583.82     236.87    0.03436     0      2   1   10   0     1        1         0    0      1 67108864  8388608     128.0 NCMPI      0
+Finished            : Thu Jun  6 16:03:58 2019
