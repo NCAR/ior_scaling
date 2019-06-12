@@ -2,8 +2,8 @@
 
 ior=/glade/work/kpaul/software/ncar-ior/bin/ior
 
-for m in $(seq 0 $2); do
-   for t in $(seq 0 $3); do
+for m in $(seq $2 $3); do
+   for t in $(seq $4 $5); do
       M=$(echo "2^$m" | bc)
       T=$(echo "2^($t+3)" | bc)
       B=$(echo "$M*$T" | bc)

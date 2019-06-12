@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #PBS -N ior_n1
 #PBS -A NIOW0001
@@ -12,4 +13,4 @@ mkdir -p $TMPDIR
 module restore ncar-ior
 export LD_LIBRARY_PATH=/glade/work/kpaul/software/boost/lib:$LD_LIBRARY_PATH
 
-./scripts/runtest.sh 1 3 5
+./scripts/runtest.sh 1 0 3 0 5
